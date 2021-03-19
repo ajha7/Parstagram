@@ -10,13 +10,14 @@ import Parse
 import Alamofire
 import AlamofireImage
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var postNumberLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var biographyLabel: UILabel!
- 
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     
     var settingsArray = ["Logout"]
     var transparentView = UIView()
@@ -58,24 +59,55 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+                
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        let width = (view.frame.size.width - layout.minimumInteritemSpacing * 2) / 3
+        layout.itemSize = CGSize(width: width, height: width * 1) //1.15
+        //collectionView.collectionViewLayout = layout
         let postQuery = PFQuery(className: "Posts")
         postQuery.whereKey("author", equalTo: PFUser.current()!)
         
         postQuery.findObjectsInBackground { (posts, error) in
             if posts != nil {
                 self.posts = posts!
-                
+            
                 self.postNumberLabel.text = String(self.posts.count) + " Posts"
-                //print(posts)
+                self.collectionView.reloadData()
             } else {
                 print("Error: \(error?.localizedDescription)")
             }
         }
-        
+       
         settingsTableView.isScrollEnabled = true
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
         settingsTableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return posts.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostsCollectionViewCell", for: indexPath) as! PostsCollectionViewCell
+        
+        let post = posts[indexPath.item]
+        let imageFile = post["image"] as! PFFileObject
+        let urlString = imageFile.url!
+        let url = URL(string: urlString)!
+        cell.postImage.af.setImage(withURL: url)
+        
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderWidth = 1
+        cell.postImage.frame.size.height = cell.frame.height
+        cell.postImage.frame.size.width = cell.frame.width
+        
+        return cell
     }
     
     @IBAction func onSettingsButton(_ sender: UIBarButtonItem) {

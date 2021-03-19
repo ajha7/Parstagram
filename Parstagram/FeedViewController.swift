@@ -23,9 +23,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        tableView.estimatedRowHeight = 53
+        tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
         
         addInstagramLogo()
@@ -133,7 +131,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     cell.posterProfileImage.image = img
                     cell.posterCommentImage.image = img
                 }
-                catch let error {print("no img")}
+                catch let error {print("no img \(error)")}
             }
             
             return cell
@@ -156,8 +154,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     
                     cell.profileImage.image = img
                 }
-                catch let error {print("no img")}
+                catch let error {print("no img: \(error)")}
             }
+            
+            //cell.contentView.addSubview(cell.commentLabel)
             return cell;
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AddCommentCell")!
@@ -203,14 +203,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             selectedPost = post
         }
     }
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    
+
     func scaleImage(img: UIImage) -> UIImage {
             let size = CGSize(width: 30, height: 30)
             let scaledImage = img.af_imageAspectScaled(toFit: size)
