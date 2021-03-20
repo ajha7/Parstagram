@@ -2,77 +2,91 @@
 //  CameraViewController.swift
 //  Parstagram
 //
-//  Created by Anshul Jha on 3/12/21.
+//  Created by Anshul Jha on 3/20/21.
 //
 
 import UIKit
-import AlamofireImage
-import Parse
+import AVFoundation
 
-class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
 
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var previewView: UIView!
+    @IBOutlet weak var captureImageView: UIImageView!
+    @IBOutlet weak var photoButton: UIButton!
+    
+    var captureSession: AVCaptureSession!
+    var stillImageOutput: AVCapturePhotoOutput!
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        photoButton.backgroundColor = UIColor.black
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func onSubmit(_ sender: Any) {
-        let posts = PFObject(className: "Posts")
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.captureSession.stopRunning()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        posts["caption"] = commentTextField.text!
-        posts["author"] = PFUser.current()!
+        captureSession = AVCaptureSession()
+        captureSession.sessionPreset = .medium
         
-        let imageData = imageView.image!.pngData()
-        let file = PFFileObject(data: imageData!)
+        guard let backCamera = AVCaptureDevice.default(for: AVMediaType.video)
+            else {
+                print("Unable to access back camera!")
+                return
+        }
         
-        posts["image"] = file
-        
-        posts.saveInBackground { (success, error) in
-            if success {
-                self.dismiss(animated: true, completion: nil)
-                print("saved!")
-            } else {
-                print("error!")
+        do {
+            let input = try AVCaptureDeviceInput(device: backCamera)
+            
+            stillImageOutput = AVCapturePhotoOutput()
+            
+            if captureSession.canAddInput(input) && captureSession.canAddOutput(stillImageOutput) {
+                captureSession.addInput(input)
+                captureSession.addOutput(stillImageOutput)
+                setupLivePreview()
             }
         }
-    }
-    
-    @IBAction func onCameraClick(_ sender: Any) {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
-        //picker.sourceType = .camera
-        
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            picker.sourceType = .camera
-        } else {
-            picker.sourceType = .photoLibrary
+        catch let error  {
+            print("Error Unable to initialize back camera:  \(error.localizedDescription)")
         }
-        
-        self.present(picker, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let image = info[.editedImage] as! UIImage
+    func setupLivePreview() {
         
-        let size = CGSize(width: 300, height: 300)
-        let scaledImage = image.af.imageAspectScaled(toFill: size)
+        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         
-        imageView.image = scaledImage
-        dismiss(animated: true, completion: nil)
-    }
-    /*
-    // MARK: - Navigation
+        videoPreviewLayer.videoGravity = .resizeAspect
+        videoPreviewLayer.connection?.videoOrientation = .portrait
+        previewView.layer.addSublayer(videoPreviewLayer)
+        
+        DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
+            self.captureSession.startRunning()
+            
+            DispatchQueue.main.async {
+                self.videoPreviewLayer.frame = self.previewView.bounds
+            }
+        }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
+    
+    @IBAction func didTakePhoto(_ sender: Any) {
+        let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
+        stillImageOutput.capturePhoto(with: settings, delegate: self)
+    }
+    
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        
+        guard let imageData = photo.fileDataRepresentation()
+            else { return }
+        
+        let image = UIImage(data: imageData)
+        captureImageView.image = image
+    }
 
 }

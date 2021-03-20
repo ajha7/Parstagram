@@ -14,6 +14,8 @@
 		470AFB6826027DC70093C484 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFB6726027DC70093C484 /* EditProfileViewController.swift */; };
 		470AFB6D26042B460093C484 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFB6C26042B460093C484 /* TabBarViewController.swift */; };
 		470AFB72260491300093C484 /* PostsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFB71260491300093C484 /* PostsCollectionViewCell.swift */; };
+		470AFB872605E5620093C484 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFB862605E5620093C484 /* CameraViewController.swift */; };
+		470AFB8C2605F8B10093C484 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFB8B2605F8B10093C484 /* CommentViewController.swift */; };
 		470BE76C25FC1419001568D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470BE76B25FC1419001568D7 /* AppDelegate.swift */; };
 		470BE76E25FC1419001568D7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470BE76D25FC1419001568D7 /* SceneDelegate.swift */; };
 		470BE77325FC1419001568D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 470BE77125FC1419001568D7 /* Main.storyboard */; };
@@ -24,7 +26,7 @@
 		47312AF325FCA42600A90B7E /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47312AF225FCA42600A90B7E /* PostCell.swift */; };
 		47E82E1225FC586400867018 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E82E1125FC586400867018 /* LoginViewController.swift */; };
 		47E82E1725FC587800867018 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E82E1625FC587800867018 /* FeedViewController.swift */; };
-		47E82E1C25FC62EA00867018 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E82E1B25FC62EA00867018 /* CameraViewController.swift */; };
+		47E82E1C25FC62EA00867018 /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E82E1B25FC62EA00867018 /* ImagePickerViewController.swift */; };
 		7BF7CFCD5D3ABA502B5FA95A /* Pods_Parstagram_ParstagramUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70EF75EC06960015A49B66D /* Pods_Parstagram_ParstagramUITests.framework */; };
 		958D3D2D05EA2BF0006F4B5D /* Pods_ParstagramTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41F65301D8D51419216859 /* Pods_ParstagramTests.framework */; };
 /* End PBXBuildFile section */
@@ -55,6 +57,8 @@
 		470AFB6726027DC70093C484 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		470AFB6C26042B460093C484 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		470AFB71260491300093C484 /* PostsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCollectionViewCell.swift; sourceTree = "<group>"; };
+		470AFB862605E5620093C484 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		470AFB8B2605F8B10093C484 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		470BE76825FC1419001568D7 /* Parstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		470BE76B25FC1419001568D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		470BE76D25FC1419001568D7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,7 +76,7 @@
 		479A1CC9142CCB4F67D2C68C /* Pods_Parstagram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parstagram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		47E82E1125FC586400867018 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		47E82E1625FC587800867018 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		47E82E1B25FC62EA00867018 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		47E82E1B25FC62EA00867018 /* ImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		48A1E828FC0011F83C893B09 /* Pods-Parstagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parstagram.debug.xcconfig"; path = "Target Support Files/Pods-Parstagram/Pods-Parstagram.debug.xcconfig"; sourceTree = "<group>"; };
 		63BBD920FFD8477027769766 /* Pods-Parstagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parstagram.release.xcconfig"; path = "Target Support Files/Pods-Parstagram/Pods-Parstagram.release.xcconfig"; sourceTree = "<group>"; };
 		6F3051D09864285EDE98CFC7 /* Pods-ParstagramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParstagramTests.debug.xcconfig"; path = "Target Support Files/Pods-ParstagramTests/Pods-ParstagramTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -166,13 +170,15 @@
 				470BE77925FC1419001568D7 /* Info.plist */,
 				47E82E1125FC586400867018 /* LoginViewController.swift */,
 				47E82E1625FC587800867018 /* FeedViewController.swift */,
-				47E82E1B25FC62EA00867018 /* CameraViewController.swift */,
+				47E82E1B25FC62EA00867018 /* ImagePickerViewController.swift */,
 				47312AF225FCA42600A90B7E /* PostCell.swift */,
 				470AFB3C260042740093C484 /* CommentCell.swift */,
 				470AFB4D2601775D0093C484 /* ProfileViewController.swift */,
 				470AFB5C2601DC9F0093C484 /* SettingsCell.swift */,
 				470AFB6726027DC70093C484 /* EditProfileViewController.swift */,
 				470AFB6C26042B460093C484 /* TabBarViewController.swift */,
+				470AFB862605E5620093C484 /* CameraViewController.swift */,
+				470AFB8B2605F8B10093C484 /* CommentViewController.swift */,
 			);
 			path = Parstagram;
 			sourceTree = "<group>";
@@ -433,10 +439,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				470AFB8C2605F8B10093C484 /* CommentViewController.swift in Sources */,
 				47E82E1225FC586400867018 /* LoginViewController.swift in Sources */,
-				47E82E1C25FC62EA00867018 /* CameraViewController.swift in Sources */,
+				47E82E1C25FC62EA00867018 /* ImagePickerViewController.swift in Sources */,
 				470AFB6D26042B460093C484 /* TabBarViewController.swift in Sources */,
 				470BE76C25FC1419001568D7 /* AppDelegate.swift in Sources */,
+				470AFB872605E5620093C484 /* CameraViewController.swift in Sources */,
 				47E82E1725FC587800867018 /* FeedViewController.swift in Sources */,
 				470BE76E25FC1419001568D7 /* SceneDelegate.swift in Sources */,
 				47312AF325FCA42600A90B7E /* PostCell.swift in Sources */,
@@ -621,14 +629,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5SJ2C8YW57;
 				INFOPLIST_FILE = Parstagram/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = codepath.Parstagram;
+				PRODUCT_BUNDLE_IDENTIFIER = codepath.ajha7.Parstagram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -640,14 +652,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5SJ2C8YW57;
 				INFOPLIST_FILE = Parstagram/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = codepath.Parstagram;
+				PRODUCT_BUNDLE_IDENTIFIER = codepath.ajha7.Parstagram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

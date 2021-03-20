@@ -31,11 +31,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.usernameLabel.text = "@" + (PFUser.current()?.username)!
         
         let userQuery = PFUser.query()
-        userQuery!.whereKey("objectId", equalTo: PFUser.current()!.objectId)
+        userQuery!.whereKey("objectId", equalTo: PFUser.current()!.objectId!)
         
         //userQuery!.whereKeyExists("profile_photo")
         do {
-            var user =  try userQuery!.findObjects().first as! PFUser
+            let user =  try userQuery!.findObjects().first as! PFUser
             
             if user["profile_photo"] != nil {
                 let imageFile = user["profile_photo"] as! PFFileObject

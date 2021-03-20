@@ -19,29 +19,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var showsCommentBar = false
     var selectedPost: PFObject!
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableView.automaticDimension
-        
         addInstagramLogo()
-        /*
-        let userQuery = PFUser.query()
-        userQuery!.whereKey("objectId", equalTo: PFUser.current()!.objectId)
-        do {
-            var user =  try userQuery!.findObjects().first as! PFUser
-            
-            if user["profile_photo"] != nil {
-                let imageFile = user["profile_photo"] as! PFFileObject
-                let urlString = imageFile.url!
-                let url = URL(string: urlString)!
-                
-            }
-        } catch let error {
-            print("Error finding user, \(error)")
-        }*/
         
         commentBar.inputTextView.placeholder = "Add a comment..."
         commentBar.sendButton.title = "Post"
@@ -49,6 +30,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.estimatedRowHeight = 44
+        tableView.rowHeight = UITableView.automaticDimension
         
         tableView.keyboardDismissMode = .interactive
         
@@ -59,7 +43,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func keyboardWillBeHidden(note: Notification) {
         commentBar.inputTextView.text = nil
         showsCommentBar = false
-        becomeFirstResponder()
+        self.becomeFirstResponder()
     }
     
     override var inputAccessoryView: UIView? {
@@ -130,6 +114,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     img = scaleImage(img: img!)
                     cell.posterProfileImage.image = img
                     cell.posterCommentImage.image = img
+                    
+                    cell.posterProfileImage.isUserInteractionEnabled = true
                 }
                 catch let error {print("no img \(error)")}
             }
@@ -197,7 +183,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if indexPath.row == comments.count + 1 {
             showsCommentBar = true
-            self.becomeFirstResponder() //why?
+            self.becomeFirstResponder()
             commentBar.inputTextView.becomeFirstResponder()
             
             selectedPost = post

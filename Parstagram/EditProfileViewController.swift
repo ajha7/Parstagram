@@ -16,18 +16,28 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var biographyTextField: UITextField!
     
-    let user = PFUser.current()!
+    var user = PFUser.current()!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // self.navigationItem.setHidesBackButton(true, animated: false)
+        
         self.navigationItem.backButtonTitle = "Cancel"
-        if user["profile_photo"] != nil {
-            let imageFile = user["profile_photo"] as! PFFileObject
-            let urlString = imageFile.url!
-            let url = URL(string: urlString)!
-            
-            imageView.af.setImage(withURL: url)
+        
+        let userQuery = PFUser.query()
+        userQuery!.whereKey("objectId", equalTo: PFUser.current()!.objectId!)
+        do {
+            user = try userQuery!.findObjects().first as! PFUser
+            if user["profile_photo"] != nil {
+                let imageFile = user["profile_photo"] as! PFFileObject
+                let urlString = imageFile.url!
+                let url = URL(string: urlString)!
+                
+                imageView.af.setImage(withURL: url)
+            } else {
+                imageView.image = UIImage(named: "profile_tab")
+            }
+        } catch let error {
+            print("error retrieving error: \(error)")
         }
     }
     
@@ -71,7 +81,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.editedImage] as! UIImage
         
-        let size = CGSize(width: 100, height: 100)
+        let size = CGSize(width: 90, height: 90)
         let scaledImage = image.af.imageAspectScaled(toFill: size)
         
         imageView.image = scaledImage

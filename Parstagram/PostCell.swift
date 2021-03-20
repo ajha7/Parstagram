@@ -15,7 +15,11 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var posterUsername: UILabel!
     @IBOutlet weak var posterCommentImage: UIImageView!
     
-    @IBOutlet weak var posterProfileImage: UIImageView!
+    @IBOutlet weak var posterProfileImage: UIImageView! {
+        didSet {
+            posterProfileImage.isUserInteractionEnabled = true
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
