@@ -8,19 +8,25 @@
 import UIKit
 import AVFoundation
 
+protocol ImagePickerDelegate {
+    func tookPhoto(image: UIImage)
+}
+
 class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
 
     @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var captureImageView: UIImageView!
     @IBOutlet weak var photoButton: UIButton!
-    
+ 
+    var imagePickerDelegate: ImagePickerDelegate!   
     var captureSession: AVCaptureSession!
     var stillImageOutput: AVCapturePhotoOutput!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
+    var imageHolder: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        photoButton.backgroundColor = UIColor.black
+        photoButton.tintColor = UIColor.black
         // Do any additional setup after loading the view.
     }
     
@@ -45,7 +51,6 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             let input = try AVCaptureDeviceInput(device: backCamera)
             
             stillImageOutput = AVCapturePhotoOutput()
-            
             if captureSession.canAddInput(input) && captureSession.canAddOutput(stillImageOutput) {
                 captureSession.addInput(input)
                 captureSession.addOutput(stillImageOutput)
@@ -64,10 +69,8 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         videoPreviewLayer.videoGravity = .resizeAspect
         videoPreviewLayer.connection?.videoOrientation = .portrait
         previewView.layer.addSublayer(videoPreviewLayer)
-        
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
             self.captureSession.startRunning()
-            
             DispatchQueue.main.async {
                 self.videoPreviewLayer.frame = self.previewView.bounds
             }
@@ -87,6 +90,15 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         
         let image = UIImage(data: imageData)
         captureImageView.image = image
+        
+        imageHolder = image
+        
     }
-
+    
+    @IBAction func onDoneClick(_ sender: Any) {
+        if let image = imageHolder {
+            imagePickerDelegate.tookPhoto(image: image)
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
 }

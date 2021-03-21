@@ -12,7 +12,7 @@
         <!--Feed View Controller-->
         <scene sceneID="kkA-9Z-71B">
             <objects>
-                <viewController id="qId-ES-tTW" customClass="FeedViewController" customModule="Parstagram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="qId-ES-tTW" customClass="FeedViewController" customModule="Parstagram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sGs-FD-pj0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,6 +43,9 @@
                                                         <constraint firstAttribute="height" constant="29" id="162-hZ-jKw"/>
                                                         <constraint firstAttribute="width" constant="29" id="hWb-cW-14j"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="gp7-Z5-LI7" appends="YES" id="56P-Gm-kKW"/>
+                                                    </connections>
                                                 </imageView>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poster" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9SW-XO-hPZ">
                                                     <rect key="frame" x="52" y="10" width="50" height="21"/>
@@ -308,7 +311,7 @@
         <!--Camera View Controller-->
         <scene sceneID="Dtp-fS-aJj">
             <objects>
-                <viewController id="HuA-ex-vsV" customClass="CameraViewController" customModule="Parstagram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CameraViewController" id="HuA-ex-vsV" customClass="CameraViewController" customModule="Parstagram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S6H-Nd-8Sb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -318,7 +321,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LbE-3y-aJQ">
-                                <rect key="frame" x="198" y="619" width="216" height="222"/>
+                                <rect key="frame" x="198" y="619" width="147" height="189"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Wd-Mr-jkT">
                                 <rect key="frame" x="36" y="685.5" width="113" height="88"/>
@@ -331,18 +334,28 @@
                                     <action selector="didTakePhoto:" destination="HuA-ex-vsV" eventType="touchUpInside" id="Joz-w6-aUF"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z8H-Qf-u10">
+                                <rect key="frame" x="358" y="778" width="37" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="onDoneClick:" destination="HuA-ex-vsV" eventType="touchUpInside" id="Mlc-A3-Evt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9fo-bw-p7C"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="9fo-bw-p7C" firstAttribute="trailing" secondItem="Z8H-Qf-u10" secondAttribute="trailing" constant="19" id="13R-8f-Yk3"/>
                             <constraint firstItem="5Wd-Mr-jkT" firstAttribute="leading" secondItem="9fo-bw-p7C" secondAttribute="leading" constant="36" id="24a-4a-IFE"/>
+                            <constraint firstItem="Z8H-Qf-u10" firstAttribute="bottom" secondItem="LbE-3y-aJQ" secondAttribute="bottom" id="7cv-21-a4V"/>
                             <constraint firstItem="bWj-Zc-QHI" firstAttribute="top" secondItem="S6H-Nd-8Sb" secondAttribute="top" id="Ay4-Rt-OHq"/>
                             <constraint firstAttribute="trailing" secondItem="bWj-Zc-QHI" secondAttribute="trailing" id="DsZ-0n-um1"/>
                             <constraint firstItem="LbE-3y-aJQ" firstAttribute="leading" secondItem="5Wd-Mr-jkT" secondAttribute="trailing" constant="49" id="PYr-lI-O2E"/>
                             <constraint firstItem="5Wd-Mr-jkT" firstAttribute="top" secondItem="bWj-Zc-QHI" secondAttribute="bottom" constant="74" id="QPy-2K-5s2"/>
-                            <constraint firstItem="bWj-Zc-QHI" firstAttribute="trailing" secondItem="LbE-3y-aJQ" secondAttribute="trailing" id="WSd-t7-Zl4"/>
+                            <constraint firstItem="Z8H-Qf-u10" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LbE-3y-aJQ" secondAttribute="trailing" constant="8" symbolic="YES" id="Ur3-Ir-Yqn"/>
+                            <constraint firstItem="bWj-Zc-QHI" firstAttribute="trailing" secondItem="LbE-3y-aJQ" secondAttribute="trailing" constant="69" id="WSd-t7-Zl4"/>
                             <constraint firstItem="bWj-Zc-QHI" firstAttribute="leading" secondItem="S6H-Nd-8Sb" secondAttribute="leading" id="hni-ZQ-a2X"/>
-                            <constraint firstItem="5Wd-Mr-jkT" firstAttribute="centerY" secondItem="LbE-3y-aJQ" secondAttribute="centerY" id="jVG-Ew-XQU"/>
+                            <constraint firstItem="5Wd-Mr-jkT" firstAttribute="centerY" secondItem="LbE-3y-aJQ" secondAttribute="centerY" constant="16.5" id="jVG-Ew-XQU"/>
                             <constraint firstItem="LbE-3y-aJQ" firstAttribute="top" secondItem="bWj-Zc-QHI" secondAttribute="bottom" constant="8" symbolic="YES" id="rk7-uz-9FN"/>
                             <constraint firstItem="9fo-bw-p7C" firstAttribute="bottom" secondItem="5Wd-Mr-jkT" secondAttribute="bottom" constant="33" id="uVy-nd-f4h"/>
                         </constraints>
@@ -356,12 +369,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lx0-II-EEy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-784" y="2477"/>
+            <point key="canvasLocation" x="-784.05797101449286" y="2476.3392857142858"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="x1C-D7-nzF">
             <objects>
-                <viewController title="Profile View Controller" id="HXz-Jg-Vfj" customClass="ProfileViewController" customModule="Parstagram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profile View Controller" modalPresentationStyle="fullScreen" id="HXz-Jg-Vfj" customClass="ProfileViewController" customModule="Parstagram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kUS-1Q-QyD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -492,32 +505,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram_logo" translatesAutoresizingMaskIntoConstraints="NO" id="IEW-fH-UkL">
-                                <rect key="frame" x="42" y="181" width="330" height="148"/>
+                                <rect key="frame" x="42" y="132" width="330" height="148"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeS-tg-iLS">
-                                <rect key="frame" x="42" y="377" width="102" height="21"/>
+                                <rect key="frame" x="42" y="328" width="102" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zdb-eU-flA">
-                                <rect key="frame" x="42" y="406" width="304" height="34"/>
+                                <rect key="frame" x="42" y="357" width="304" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWg-xa-PZk">
-                                <rect key="frame" x="42" y="479" width="102" height="21"/>
+                                <rect key="frame" x="42" y="430" width="102" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SHj-7W-nuU">
-                                <rect key="frame" x="42" y="508" width="304" height="34"/>
+                                <rect key="frame" x="42" y="459" width="304" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ew5-rz-HJL">
-                                <rect key="frame" x="69" y="570" width="93" height="43"/>
+                                <rect key="frame" x="69" y="521" width="93" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="XiD-rh-F7q"/>
                                 </constraints>
@@ -530,7 +543,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gza-VX-abH">
-                                <rect key="frame" x="253" y="569" width="93" height="43"/>
+                                <rect key="frame" x="253" y="520" width="93" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="dUc-7D-fNf"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="93" id="hdF-7D-hai"/>
@@ -554,13 +567,13 @@
                             <constraint firstItem="zdb-eU-flA" firstAttribute="top" secondItem="YeS-tg-iLS" secondAttribute="bottom" constant="8" symbolic="YES" id="Oe8-7p-D43"/>
                             <constraint firstItem="bMh-dB-IDG" firstAttribute="trailing" secondItem="gza-VX-abH" secondAttribute="trailing" constant="68" id="XwW-IT-B4g"/>
                             <constraint firstItem="YeS-tg-iLS" firstAttribute="leading" secondItem="bMh-dB-IDG" secondAttribute="leading" constant="42" id="YIc-xi-bPd"/>
-                            <constraint firstItem="YeS-tg-iLS" firstAttribute="top" secondItem="dXY-5O-XgR" secondAttribute="top" constant="377" id="ZCo-vK-WF8"/>
+                            <constraint firstItem="YeS-tg-iLS" firstAttribute="top" secondItem="dXY-5O-XgR" secondAttribute="top" constant="328" id="ZCo-vK-WF8"/>
                             <constraint firstItem="YeS-tg-iLS" firstAttribute="leading" secondItem="tWg-xa-PZk" secondAttribute="leading" id="Zva-JJ-tqp"/>
                             <constraint firstItem="gza-VX-abH" firstAttribute="trailing" secondItem="zdb-eU-flA" secondAttribute="trailing" id="aKn-tT-C9K"/>
                             <constraint firstItem="YeS-tg-iLS" firstAttribute="top" secondItem="IEW-fH-UkL" secondAttribute="bottom" constant="48" id="aOa-Hi-v9S"/>
                             <constraint firstItem="gza-VX-abH" firstAttribute="leading" secondItem="Ew5-rz-HJL" secondAttribute="trailing" constant="91" id="c5s-Hj-1ki"/>
                             <constraint firstItem="bMh-dB-IDG" firstAttribute="trailing" secondItem="YeS-tg-iLS" secondAttribute="trailing" constant="270" id="cKv-MK-l8H"/>
-                            <constraint firstItem="IEW-fH-UkL" firstAttribute="top" secondItem="bMh-dB-IDG" secondAttribute="top" constant="137" id="fXg-xG-6nL"/>
+                            <constraint firstItem="IEW-fH-UkL" firstAttribute="top" secondItem="bMh-dB-IDG" secondAttribute="top" constant="88" id="fXg-xG-6nL"/>
                             <constraint firstItem="SHj-7W-nuU" firstAttribute="top" secondItem="tWg-xa-PZk" secondAttribute="bottom" constant="8" symbolic="YES" id="oBJ-SE-I1S"/>
                             <constraint firstItem="Ew5-rz-HJL" firstAttribute="top" secondItem="SHj-7W-nuU" secondAttribute="bottom" constant="28" id="oM1-kB-IsL"/>
                             <constraint firstItem="YeS-tg-iLS" firstAttribute="leading" secondItem="zdb-eU-flA" secondAttribute="leading" id="p1h-9F-hsp"/>

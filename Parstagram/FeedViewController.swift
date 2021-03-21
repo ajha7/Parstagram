@@ -60,11 +60,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let query = PFQuery(className: "Posts")
         query.includeKeys(["author", "comments", "comments.author"])
         query.limit = 20
-        
+        query.addDescendingOrder("createdAt")
         query.findObjectsInBackground { (posts, error) in
             if posts != nil {
                 self.posts = posts!
                 self.tableView.reloadData()
+            }
+            else {
+                print("Error: \(error)")
             }
         }
     }
@@ -90,10 +93,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let post = posts[indexPath.section]
+        
         let comments = (post["comments"] as? [PFObject]) ?? []
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
-            let post = posts[indexPath.section]
+
+            let post = posts[indexPath.section]  //most recent psot first
             let user = post["author"] as! PFUser
             cell.usernameLabel.text = user.username
             
@@ -122,9 +127,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             return cell
         } else if indexPath.row <= comments.count{
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
-            let comment = comments[indexPath.row - 1]
 
+            let comment = comments[indexPath.row - 1]
+            
             cell.commentLabel.text = comment["text"] as? String
         
             let user = comment["author"] as! PFUser
@@ -147,6 +154,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell;
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AddCommentCell")!
+
             return cell
         }
     }
